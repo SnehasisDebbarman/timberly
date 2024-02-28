@@ -2,8 +2,8 @@ import {
   ArrowDownIcon,
   ArrowRightIcon,
   ArrowUpIcon,
-  CheckCircledIcon,
-  CrossCircledIcon,
+  // CheckCircledIcon,
+  // CrossCircledIcon,
   QuestionMarkCircledIcon,
   StopwatchIcon,
 } from "@radix-ui/react-icons";
