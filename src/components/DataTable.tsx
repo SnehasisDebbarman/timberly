@@ -10,6 +10,8 @@ import {
     ColumnFiltersState,
     getFilteredRowModel,
     VisibilityState,
+    getFacetedRowModel,
+    getFacetedUniqueValues
 } from "@tanstack/react-table"
 
 import {
@@ -21,13 +23,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import {
-    DropdownMenu,
-    DropdownMenuCheckboxItem,
-    DropdownMenuContent,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -37,6 +33,7 @@ interface DataTableProps<TData, TValue> {
 
 import React from "react"
 import DataTablePagination from "@/components/DataTablePagination"
+import { DataTableToolbar } from "./DataTableToolBar"
 
 export function DataTable<TData, TValue>({
     columns,
@@ -49,81 +46,40 @@ export function DataTable<TData, TValue>({
     );
     const [columnVisibility, setColumnVisibility] =
         React.useState<VisibilityState>({})
-
     const [rowSelection, setRowSelection] = React.useState({})
 
     const table = useReactTable({
         data,
         columns,
-        getCoreRowModel: getCoreRowModel(),
-        getPaginationRowModel: getPaginationRowModel(),
-        onSortingChange: setSorting,
-        getSortedRowModel: getSortedRowModel(),
-        onColumnFiltersChange: setColumnFilters,
-        onColumnVisibilityChange: setColumnVisibility,
-        getFilteredRowModel: getFilteredRowModel(),
-        onRowSelectionChange: setRowSelection,
         state: {
             sorting,
-            columnFilters,
             columnVisibility,
-            rowSelection
+            rowSelection,
+            columnFilters,
         },
+        enableRowSelection: true,
+        onRowSelectionChange: setRowSelection,
+        onSortingChange: setSorting,
+        onColumnFiltersChange: setColumnFilters,
+        onColumnVisibilityChange: setColumnVisibility,
+        getCoreRowModel: getCoreRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        getFacetedRowModel: getFacetedRowModel(),
+        getFacetedUniqueValues: getFacetedUniqueValues(),
     })
 
     return (
-        <div className="border rounded-md">
-            {/* show selected rows */}
-            <div className="flex-1 text-sm text-muted-foreground">
-                {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                {table.getFilteredRowModel().rows.length} row(s) selected.
-            </div>
-
-            <div className="flex items-center py-4">
-                <Input
-                    placeholder="Filter emails..."
-                    value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-                    onChange={(event) =>
-                        table.getColumn("email")?.setFilterValue(event.target.value)
-                    }
-                    className="max-w-sm"
-                />
-            </div>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="ml-auto">
-                        Columns
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                    {table
-                        .getAllColumns()
-                        .filter(
-                            (column) => column.getCanHide()
-                        )
-                        .map((column) => {
-                            return (
-                                <DropdownMenuCheckboxItem
-                                    key={column.id}
-                                    className="capitalize"
-                                    checked={column.getIsVisible()}
-                                    onCheckedChange={(value) =>
-                                        column.toggleVisibility(!!value)
-                                    }
-                                >
-                                    {column.id}
-                                </DropdownMenuCheckboxItem>
-                            )
-                        })}
-                </DropdownMenuContent>
-            </DropdownMenu>
-            <Table>
+        <div className="p-5 bg-white border-2 rounded-md">
+            <DataTableToolbar table={table} />
+            <Table className="text-sm">
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>
                             {headerGroup.headers.map((header) => {
                                 return (
-                                    <TableHead key={header.id}>
+                                    <TableHead key={header.id} className="p-2">
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
@@ -142,9 +98,10 @@ export function DataTable<TData, TValue>({
                             <TableRow
                                 key={row.id}
                                 data-state={row.getIsSelected() && "selected"}
+
                             >
                                 {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
+                                    <TableCell key={cell.id} className="p-1">
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </TableCell>
                                 ))}
@@ -179,6 +136,11 @@ export function DataTable<TData, TValue>({
                     Next
                 </Button>
             </div>
+            {/* show selected rows */}
+            {/* <div className="flex-1 text-sm text-muted-foreground">
+                {table.getFilteredSelectedRowModel().rows.length} of{" "}
+                {table.getFilteredRowModel().rows.length} row(s) selected.
+            </div> */}
         </div>
 
     )

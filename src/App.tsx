@@ -13,7 +13,7 @@ function App() {
   const navigate = useNavigate();
 
   return (
-    <div className='w-screen h-screen p-20 overflow-hidden overflow-y-hidden'>
+    <div className='w-screen h-screen p-20 overflow-hidden overflow-y-hidden bg-white'>
       <h1 className='text-[64px] text-[#595959] josefin-slab-500'>TIMBERLY</h1>
       <h5 className='text-[16px] w-1/2 habibi-regular'>Browse our wide variety of modern furniture ? timber to create your ideal living place</h5>
       <div className='flex gap-10 py-12'>
@@ -38,6 +38,7 @@ function App() {
             <Formik
               initialValues={{ email: '', password: '' }}
               validate={values => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const errors: any = {};
                 if (!values.email) {
                   errors.email = 'Required';

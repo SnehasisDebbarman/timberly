@@ -11,17 +11,8 @@ import {
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import DataTableColumnHeader from "./DataTableColumnHeader"
+import { Payment } from "@/lib/types"
 
-
-
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Payment = {
-    id: string
-    amount: number
-    status: "pending" | "processing" | "success" | "failed"
-    email: string
-}
 
 export const columns: ColumnDef<Payment>[] = [
     {
@@ -98,9 +89,5 @@ export const columns: ColumnDef<Payment>[] = [
             }).format(amount)
             return <div className="font-medium text-right">{formatted}</div>
         },
-    },
-    {
-        accessorKey: "status",
-        header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
     },
 ]
