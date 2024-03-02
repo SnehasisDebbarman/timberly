@@ -1,49 +1,82 @@
-
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-
-import { Button } from "@/components/ui/button"
-import {
-    Form,
-    FormControl,
-    FormDescription,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
+import * as yup from "yup"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
 
 
 
+import {
+    Formik,
+    // FormikHelpers,
+    // FormikProps,
+    Form,
+    // Field,
+    // FieldProps,
+} from 'formik';
+import { ProductInfo } from "@/lib/types";
 
-const formSchema = z.object({
-    username: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
-    }),
-    bio: z.string()
 
+const formSchema = yup.object({
+    propertyName: yup.string(),
+    unitType: yup.string(),
+    categoryName: yup.string(),
+    subCategoryName: yup.string(),
+    productType: yup.string(),
+    height: yup.string().nullable(),
+    width: yup.string().nullable(),
+    weight: yup.string().nullable(),
+    remarks: yup.string().nullable(),
 })
 
+
 export default function AddProduct() {
-    // ...
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            username: "",
-        },
-    })
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+    const initialValues: ProductInfo = {
+        propertyName: "",
+        unitType: "",
+        categoryName: "",
+        subCategoryName: "",
+        productType: "",
+        height: "",
+        width: "",
+        weight: null,
+        remarks: ""
     }
+
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField
+        <div>
+            <h1>My Example</h1>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={formSchema}
+                onSubmit={(values, actions) => {
+                    console.log({ values, actions });
+                    alert(JSON.stringify(values, null, 2));
+                    actions.setSubmitting(false);
+                }}
+            >
+                {({ errors, touched }) => (
+                    <Form>
+                        <label htmlFor="propertyName">propertyName</label>
+                        <div className="grid w-full max-w-sm items-center gap-1.5">
+                            <Label htmlFor="propertyName">Email</Label>
+                            <Input type="propertyName" id="propertyName" placeholder="propertyName" />
+                        </div>
+                        {errors.propertyName && touched.propertyName ? (
+                            <div>{errors.propertyName}</div>
+                        ) : ""}
+
+                        <div className="grid w-full max-w-sm items-center gap-1.5">
+                            <Label htmlFor="propertyName">unitType</Label>
+                            <Input type="propertyName" id="propertyName" placeholder="propertyName" />
+                        </div>
+                        {errors.propertyName && touched.propertyName ? (
+                            <div>{errors.propertyName}</div>
+                        ) : ""}
+
+
+
+
+                        {/* <FormField
                     control={form.control}
                     name="username"
                     render={({ field }) => (
@@ -58,29 +91,14 @@ export default function AddProduct() {
                             <FormMessage />
                         </FormItem>
                     )}
-                />
-                <FormField
-                    control={form.control}
-                    name="bio"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Bio</FormLabel>
-                            <FormControl>
-                                <Textarea
-                                    placeholder="Tell us a little bit about yourself"
-                                    className="resize-none"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormDescription>
-                                You can <span>@mention</span> other users and organizations.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit">Submit</Button>
-            </form>
-        </Form>
-    )
+//                 /> */}
+                        {/* <Field id="firstName" name="firstName" placeholder="First Name" /> */}
+                        <Button type="submit">Submit</Button>
+                    </Form>
+
+                )}
+
+            </Formik>
+        </div>
+    );
 }

@@ -10,6 +10,12 @@ import Dashboard from './pages/Dashboard/Dashboard.tsx';
 import HomeScreen from './pages/Home.tsx';
 import Products from './pages/Products/Index.tsx';
 import Stocks from './pages/Stocks/index.tsx';
+import {
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -20,6 +26,10 @@ const router = createBrowserRouter([
     path: "dashboard",
     element: <Dashboard />,
     children: [
+      {
+        path: "",
+        element: <HomeScreen />,
+      },
       {
         path: "home",
         element: <HomeScreen />,
@@ -38,6 +48,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>,
 )
