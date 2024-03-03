@@ -1,7 +1,7 @@
 import {
     useQuery,
 } from '@tanstack/react-query'
-import { ProductInfo, RequestOptions } from '@/lib/types';
+import { RequestOptions } from '@/lib/types';
 
 import {
     Card,
@@ -31,9 +31,9 @@ export default function ProductList() {
     return (
         <div>
             <div className='grid grid-cols-1 gap-2 m-2 md:grid-cols-3'>
-
                 {
-                    data.map((it: ProductInfo, i: number) => (
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    data.map((it: any, i: number) => (
                         <div key={i}>
                             <Card>
                                 <CardHeader>
@@ -43,8 +43,8 @@ export default function ProductList() {
                                 <CardContent>
                                     <div className='flex flex-col gap-2'>
                                         {
-                                            Object.keys(it).map((key: string) => {
-                                                return <InfoChip type={key} value={it[key]} />
+                                            Object.keys(it).map((key, i: number) => {
+                                                return <InfoChip key={i} type={key} value={it[key]} />
                                             })
                                         }
                                     </div>

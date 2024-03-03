@@ -5,8 +5,10 @@ export type Payment = {
   email: string;
 };
 export interface RequestOptions {
-  method: "GET" | "POST" | "PUT" | "DELETE";
-  redirect: "follow" | "error" | "manual";
+  method: string;
+  headers?: Headers;
+  body?: BodyInit;
+  redirect: RequestRedirect;
 }
 export interface ProductInfo {
   propertyName: string;

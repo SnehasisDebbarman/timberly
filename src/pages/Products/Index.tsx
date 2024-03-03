@@ -1,14 +1,7 @@
 // import { columns } from "@/components/columns"
 // import { payments } from "@/lib/data"
 // import { DataTable } from "@/components/DataTable"
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
+import { useState } from "react"
 import AddProduct from './AddProduct'
 import { Button } from '@/components/ui/button'
 import { PlusIcon } from '@radix-ui/react-icons'
@@ -28,26 +21,15 @@ import {
 
 
 function Products() {
-
+    const [isAddDialogOpen, setIsAddDialogOpen] = useState<boolean>(false);
+    const [isRefreshed, setIsRefreshed] = useState<boolean>(false)
 
 
     return (
         <div>
             <div className="flex justify-between p-2">
                 <h2 className="text-2xl font-bold tracking-tight">Products</h2>
-                <Dialog>
-                    <DialogTrigger>
-                        <Button>  <PlusIcon className="mr-2" /> Add Products</Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle>Are you absolutely sure?</DialogTitle>
-                            <DialogDescription>
-                                <AddProduct />
-                            </DialogDescription>
-                        </DialogHeader>
-                    </DialogContent>
-                </Dialog>
+                <Button onClick={() => setIsAddDialogOpen(true)}>  <PlusIcon className="mr-2" /> Add Products</Button>
             </div>
             {/* filter */}
             <div className="flex gap-2">
@@ -93,14 +75,16 @@ function Products() {
                     </SelectContent>
                 </Select>
             </div>
-
-
-
-
-
-
-            {/* <DataTable columns={columns} data={payments} /> */}
-            <ProductList />
+            {
+                isRefreshed ? <ProductList /> : <ProductList />
+            }
+            {
+                isAddDialogOpen && <div className="absolute top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-[rgba(0,0,0,0.3)]">
+                    <div className="p-8 bg-white border-2 border-gray-200 rounded-lg opacity-100 max-w-max">
+                        <AddProduct setIsRefreshed={setIsRefreshed} setIsAddDialogOpen={setIsAddDialogOpen} />
+                    </div>
+                </div>
+            }
         </div>
     )
 }
