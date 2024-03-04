@@ -15,16 +15,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-
-
-
-
-
 function Products() {
     const [isAddDialogOpen, setIsAddDialogOpen] = useState<boolean>(false);
     const [isRefreshed, setIsRefreshed] = useState<boolean>(false)
-
-
     return (
         <div>
             <div className="flex justify-between p-2">

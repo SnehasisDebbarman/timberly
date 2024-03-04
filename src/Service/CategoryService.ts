@@ -1,4 +1,4 @@
-import { RequestOptions, ProductInfo } from "@/lib/types";
+import { RequestOptions, ProductInfo, TransactionType } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 
 export function GetAllCategory() {
@@ -46,7 +46,7 @@ export function GetAllSubCategory(categoryName: string) {
     });
 }
 
-export function AddProductWithDetails(values: ProductInfo) {
+export async function AddProductWithDetails(values: ProductInfo) {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   const productName =
@@ -73,8 +73,28 @@ export function AddProductWithDetails(values: ProductInfo) {
     redirect: "follow",
   };
 
-  return fetch(
+  const response = await fetch(
     "https://businesswithalldata-production.up.railway.app/api/createProperty",
     requestOptions
-  ).then((response) => response.text());
+  );
+  return await response.text();
+}
+export async function addTransactionHandler(values: TransactionType) {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify(values);
+
+  const requestOptions: RequestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  const response = await fetch(
+    "https://businesswithalldata-production.up.railway.app/api/createTransactionData",
+    requestOptions
+  );
+  return await response.text();
 }

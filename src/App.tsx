@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { useState } from 'react'
 import './App.css'
 import { Button } from "@/components/ui/button"
@@ -9,9 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function App() {
-  // const [count, setCount] = useState(0)
   const navigate = useNavigate();
-
   return (
     <div className='w-screen h-screen p-20 overflow-hidden overflow-y-hidden bg-white'>
       <h1 className='text-[64px] text-[#595959] josefin-slab-500'>TIMBERLY</h1>
@@ -38,7 +37,6 @@ function App() {
             <Formik
               initialValues={{ email: '', password: '' }}
               validate={values => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const errors: any = {};
                 if (!values.email) {
                   errors.email = 'Required';

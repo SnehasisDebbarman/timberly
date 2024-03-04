@@ -14,6 +14,8 @@ import {
   QueryClient,
   QueryClientProvider
 } from '@tanstack/react-query'
+import Transaction from './pages/Transactions/index.tsx';
+import Customers from './pages/Customers/index.tsx';
 
 const queryClient = new QueryClient()
 
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
       {
         path: "stocks",
         element: <Stocks />,
+      },
+      {
+        path: "transactions",
+        element: <Transaction />,
+      },
+      {
+        path: "customers",
+        element: <Customers />,
       },
     ],
   }

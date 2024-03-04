@@ -1,9 +1,10 @@
-// import React from 'react'
+import StockList from "./StockList";
 
 export default function index() {
     return (
         <div>
-            Stocks
+            <h2 className="text-2xl font-bold tracking-tight">Stocks</h2>
+            <StockList />
         </div>
     )
 }

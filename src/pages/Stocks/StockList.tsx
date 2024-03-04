@@ -7,22 +7,22 @@ import { RequestOptions } from '@/lib/types';
 import {
     Card,
     CardContent,
-    CardDescription,
+    // CardDescription,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
 import InfoChip from '../CustomComponents/InfoChip';
 
 
-export default function ProductList() {
+export default function StockList() {
     const requestOptions: RequestOptions = {
         method: 'GET',
         redirect: 'follow'
     };
     const { isPending, error, data } = useQuery({
-        queryKey: ['repoData'],
+        queryKey: ['stockData'],
         queryFn: () =>
-            fetch("https://businesswithalldata-production.up.railway.app/api/getProperties", requestOptions).then((res) =>
+            fetch("https://businesswithalldata-production.up.railway.app/api/getStocks", requestOptions).then((res) =>
                 res.json(),
             ),
     })
@@ -30,14 +30,14 @@ export default function ProductList() {
     if (error) return 'An error has occurred: ' + error.message
     return (
         <div>
-            <div className='grid grid-cols-1 gap-2 m-2 md:grid-cols-3'>
+            <div className={'grid grid-cols-1 gap-2 m-2 md:grid-cols-3'}>
                 {
                     data.map((it: any, i: number) => (
                         <div key={i}>
-                            <Card>
+                            <Card >
                                 <CardHeader>
                                     <CardTitle>{it?.propertyName}</CardTitle>
-                                    <CardDescription>lengthWise</CardDescription>
+                                    {/* <CardDescription>lengthWise</CardDescription> */}
                                 </CardHeader>
                                 <CardContent>
                                     <div className='flex flex-col gap-2'>

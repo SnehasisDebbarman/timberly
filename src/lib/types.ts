@@ -21,3 +21,16 @@ export interface ProductInfo {
   weight?: null;
   remarks: string;
 }
+export interface TransactionType {
+  propertyName: string;
+  transactionType: "Buy" | "Sell";
+  quantity: string;
+  pricePerUnit: string;
+  date: string;
+  customerName: string;
+  customerAddress: string;
+  customerPhNo: string;
+  transactionIdfromFE: string | null;
+  remarks: string;
+  currentBuyPriceFromFE: string;
+}

@@ -91,8 +91,6 @@ export default function AddProduct({ setIsAddDialogOpen, setIsRefreshed }: { set
                 initialValues={initialValues}
                 validationSchema={formSchema}
                 onSubmit={(values, actions) => {
-                    // console.log({ values, actions });
-                    // alert(JSON.stringify(values, null, 2));
                     AddProductWithDetails(values)
                         .then((info) => { alert(JSON.stringify(info, null, 2)); })
                         .finally(() => {
@@ -118,7 +116,6 @@ export default function AddProduct({ setIsAddDialogOpen, setIsRefreshed }: { set
                             <div className="">
                                 <div className="grid w-full max-w-sm items-center gap-1.5">
                                     <Label htmlFor="unitType">Unit Type</Label>
-                                    {/* <Input onChange={(e) => setFieldValue("unitType", e.target.value)} type="text" id="unitType" placeholder="propertyName" /> */}
                                     <Select onValueChange={(text: string) => setFieldValue("unitType", text)} defaultValue={values.unitType}>
                                         <SelectTrigger className="">
                                             <SelectValue placeholder="Select a Unit Type" />
@@ -139,9 +136,7 @@ export default function AddProduct({ setIsAddDialogOpen, setIsRefreshed }: { set
                             <div className="">
                                 <div className="grid w-full max-w-sm items-center gap-1.5">
                                     <Label htmlFor="categoryName">categoryName</Label>
-                                    {/* <Input onChange={(e) => setFieldValue("categoryName", e.target.value)} type="categoryName" id="categoryName" placeholder="categoryName" /> */}
                                     <Select onValueChange={(text: string) => {
-                                        // setSubCategoryInfo(GetAllSubCategory(text))
                                         setFieldValue("categoryName", text)
                                         GetAllSubCategory(text)
 
@@ -168,8 +163,6 @@ export default function AddProduct({ setIsAddDialogOpen, setIsRefreshed }: { set
                             <div className="">
                                 <div className="grid w-full max-w-sm items-center gap-1.5">
                                     <Label htmlFor="subCategoryName">subCategoryName</Label>
-
-                                    {/* <Input onChange={(e) => setFieldValue("subCategoryName", e.target.value)} type="subCategoryName" id="subCategoryName" placeholder="subCategoryName" /> */}
                                     <Select onValueChange={(text: string) => setFieldValue("subCategoryName", text)} defaultValue={values.subCategoryName}>
                                         <SelectTrigger className="">
                                             <SelectValue placeholder="Select a Sub Category" />
@@ -235,31 +228,6 @@ export default function AddProduct({ setIsAddDialogOpen, setIsRefreshed }: { set
                                     : null
                             }
                             <Button className="col-span-2" type="submit">Submit</Button>
-
-
-
-
-
-
-
-                            {/* <FormField
-                        control={form.control}
-                        name="username"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Username</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="shadcn" {...field} />
-                                </FormControl>
-                                <FormDescription>
-                                    This is your public display name.
-                                </FormDescription>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-    //                 /> */}
-                            {/* <Field id="firstName" name="firstName" placeholder="First Name" /> */}
-
                         </Form>
 
                     )
