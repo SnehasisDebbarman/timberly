@@ -18,7 +18,6 @@ export default function CustomInput({ valueList }: { valueList: any }) {
                 {
                     valueList.map((value: string, index: number) => {
                         <SelectItem key={index} value={value}>{value}</SelectItem>
-
                     })
                 }
             </SelectContent>
