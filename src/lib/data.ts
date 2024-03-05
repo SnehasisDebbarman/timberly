@@ -25,32 +25,17 @@ export const labels = [
 ];
 
 //"pending" | "processing" | "success" | "failed"'
-export const statuses = [
+export const transactionTypeList = [
   {
-    value: "pending",
-    label: "pending",
+    value: "Buy",
+    label: "Buy",
     icon: QuestionMarkCircledIcon,
   },
   {
-    value: "processing",
-    label: "processing",
+    value: "Sell",
+    label: "Sell",
     icon: StopwatchIcon,
   },
-  // {
-  //   value: "success",
-  //   label: "success",
-  //   icon: CheckCircledIcon,
-  // },
-  // {
-  //   value: "failed",
-  //   label: "failed",
-  //   icon: CrossCircledIcon,
-  // },
-  // {
-  //   value: "canceled",
-  //   label: "Canceled",
-  //   icon: CrossCircledIcon,
-  // },
 ];
 
 export const priorities = [

@@ -1,4 +1,4 @@
-import { columns } from "@/components/columns"
+import { columns } from "@/lib/columns"
 import { payments } from "@/lib/data"
 import { DataTable } from "@/components/DataTable"
 

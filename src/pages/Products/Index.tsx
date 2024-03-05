@@ -72,7 +72,7 @@ function Products() {
                 isRefreshed ? <ProductList /> : <ProductList />
             }
             {
-                isAddDialogOpen && <div className="absolute top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-[rgba(0,0,0,0.3)]">
+                isAddDialogOpen && <div onClick={() => setIsAddDialogOpen(false)} className="absolute top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-[rgba(0,0,0,0.3)]">
                     <div className="p-8 bg-white border-2 border-gray-200 rounded-lg opacity-100 max-w-max">
                         <AddProduct setIsRefreshed={setIsRefreshed} setIsAddDialogOpen={setIsAddDialogOpen} />
                     </div>

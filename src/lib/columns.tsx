@@ -10,8 +10,9 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import DataTableColumnHeader from "./DataTableColumnHeader"
-import { Payment } from "@/lib/types"
+import DataTableColumnHeader from "../components/DataTableColumnHeader"
+import { Payment, TransactionType } from "@/lib/types"
+import moment from "moment"
 
 
 export const columns: ColumnDef<Payment>[] = [
@@ -91,3 +92,91 @@ export const columns: ColumnDef<Payment>[] = [
         },
     },
 ]
+
+export const transactionColumns: ColumnDef<TransactionType>[] = [
+    {
+        accessorKey: "customerName",
+        header: "Customer",
+        cell: ({ row }) => {
+            // const name = JSON.stringify()
+            return <div className="font-semibold">{row.getValue("customerName")}</div>
+        },
+    },
+    {
+        accessorKey: "date",
+        header: "Date",
+        cell: ({ row }) => {
+            const date = row.getValue("date") ?? new Date()
+            return (
+                <div className="flex space-x-2">
+                    {moment(date).format("dddd, DD MMM Y")}
+                </div>
+            )
+        },
+    },
+    {
+        accessorKey: "pricePerUnit",
+        header: ({ column }) => <DataTableColumnHeader className="" column={column} title="Price per Unit" />,
+    },
+    {
+        accessorKey: "quantity",
+        // header: "quantity ",
+        header: ({ column }) => <DataTableColumnHeader className="" column={column} title="Quantity" />,
+    },
+    // {
+    //     accessorKey: "transactionIdfromFE",
+    //     header: "Transaction ID",
+    // },
+
+
+    {
+        accessorKey: "customerPhNo",
+        header: "Contact Number",
+    },
+    {
+        accessorKey: "transactionType",
+        header: "Transaction Type ",
+        filterFn: (row, id, value) => {
+            return value.includes(row.getValue(id))
+        }
+    },
+    {
+        accessorKey: "Total",
+        header: "Total",
+        // header: ({ column }) => <DataTableColumnHeader className="justify-end " column={column} title="Total" />,
+        cell: ({ row }) => {
+            const amount = parseFloat(row.getValue("pricePerUnit"))
+            const quantity = parseFloat(row.getValue("quantity"));
+            const total = amount * quantity
+            const formatted = new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "INR",
+            }).format(total)
+            return <div className="font-medium text-right">{formatted}</div>
+        },
+    },
+
+
+    // {
+    //     accessorKey: "email",
+    //     header: ({ column }) => {
+    //         return (
+    //             <DataTableColumnHeader column={column} title="Email" />
+    //         )
+    //     },
+    // },
+    // {
+    //     accessorKey: "amount",
+    //     // header: "Amount",
+    //     header: ({ column }) => <DataTableColumnHeader className="justify-end " column={column} title="Amount" />,
+    //     cell: ({ row }) => {
+    //         const amount = parseFloat(row.getValue("amount"))
+    //         const formatted = new Intl.NumberFormat("en-US", {
+    //             style: "currency",
+    //             currency: "USD",
+    //         }).format(amount)
+    //         return <div className="font-medium text-right">{formatted}</div>
+    //     },
+    // },
+]
+

@@ -1,3 +1,5 @@
+import React from "react";
+
 export type Payment = {
   id: string;
   amount: number;
@@ -33,4 +35,14 @@ export interface TransactionType {
   transactionIdfromFE: string | null;
   remarks: string;
   currentBuyPriceFromFE: string;
+}
+export interface filterType {
+  name: string;
+  value: string;
+  filterInputType: string;
+  values?: {
+    label: string;
+    value: string;
+    icon?: React.ComponentType<{ className?: string }>;
+  }[];
 }

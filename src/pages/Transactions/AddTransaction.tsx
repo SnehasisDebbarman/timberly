@@ -128,22 +128,20 @@ export default function AddTransaction({ setAddTransactionOpen }: { setAddTransa
                         control={form.control}
                         name="propertyName"
                         render={({ field }) => (
-                            <FormItem className="w-[20vw]">
+                            <FormItem >
                                 <FormLabel>Product Name</FormLabel>
                                 <Select onValueChange={(e) => { field.onChange(e); }} defaultValue={field.value}>
                                     <FormControl>
                                         <SelectTrigger>
-                                            <SelectValue placeholder="Select an Transaction Type" />
+                                            <SelectValue placeholder="Select an Product Name" />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-
                                         {
                                             data?.map((it: any) =>
                                                 <SelectItem value={it.propertyName}>{it.propertyName}</SelectItem>
                                             )
                                         }
-                                        {/* <SelectItem value="Sell">Sell</SelectItem> */}
                                     </SelectContent>
                                 </Select>
                                 <FormMessage />
@@ -155,7 +153,7 @@ export default function AddTransaction({ setAddTransactionOpen }: { setAddTransa
                         control={form.control}
                         name="transactionType"
                         render={({ field }) => (
-                            <FormItem className="w-[20vw]">
+                            <FormItem >
                                 <FormLabel>Transaction Type</FormLabel>
                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                     <FormControl>
@@ -247,7 +245,6 @@ export default function AddTransaction({ setAddTransactionOpen }: { setAddTransa
                     />
 
                     <FormField
-
                         control={form.control}
                         name="remarks"
                         render={({ field }) => (
