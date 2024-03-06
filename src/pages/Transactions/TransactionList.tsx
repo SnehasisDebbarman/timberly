@@ -1,12 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-    useQuery,
-} from '@tanstack/react-query';
-import { RequestOptions } from '@/lib/types';
-
 import { DataTable } from '@/components/DataTable';
 import { transactionColumns } from '@/lib/columns';
 import { transactionTypeList } from '@/lib/data';
+import { useGetTransactionListHook } from '@/hooks/GetTransactionListHook';
 
 const filterOptions = [
     {
@@ -24,17 +20,8 @@ const filterOptions = [
 
 
 export default function TransactionList() {
-    const requestOptions: RequestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-    };
-    const { isPending, error, data } = useQuery({
-        queryKey: ['repoData'],
-        queryFn: () =>
-            fetch("https://businesswithalldata-production.up.railway.app/api/getTransactionData", requestOptions).then((res) =>
-                res.json(),
-            ),
-    })
+    const jerk = useGetTransactionListHook();
+    const { isPending, error, data } = jerk
     if (isPending) return 'Loading...'
     if (error) return 'An error has occurred: ' + error.message
     return (

@@ -45,11 +45,6 @@ export default function Transaction() {
 
             </div>
             <TransactionOverview />
-
-
-
-
-
             <h2 className="p-5 pl-2 text-xl font-bold tracking-tight">Transactions History</h2>
             <TransactionList />
         </div>

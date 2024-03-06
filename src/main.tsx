@@ -16,8 +16,19 @@ import {
 } from '@tanstack/react-query'
 import Transaction from './pages/Transactions/index.tsx';
 import Customers from './pages/Customers/index.tsx';
+import {
+  RecoilRoot,
+} from 'recoil';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      retry: 1
+    },
+  },
+})
 
 const router = createBrowserRouter([
   {
@@ -58,8 +69,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </RecoilRoot>
   </React.StrictMode>,
 )

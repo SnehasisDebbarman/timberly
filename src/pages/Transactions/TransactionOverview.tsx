@@ -1,4 +1,4 @@
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
     Card,
     CardContent,
@@ -6,12 +6,31 @@ import {
     // CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
+import { transactionListDataState } from "@/store/store";
+import { useRecoilValue } from "recoil";
+
 export default function TransactionOverview() {
+    const transactionList = useRecoilValue(transactionListDataState);
+    let revenue = 0.0
+    let expenditure = 0.0;
+    let sale = 0.0
+    transactionList.map((it: any) => {
+        revenue += (parseFloat(it?.quantity) * parseFloat(it?.pricePerUnit))
+        if (it?.transactionType?.toLowerCase() === "buy") {
+            sale += (parseFloat(it?.quantity) * parseFloat(it?.pricePerUnit))
+        }
+        else {
+            expenditure += (parseFloat(it?.quantity) * parseFloat(it?.pricePerUnit))
+
+        }
+
+    })
     return (
         <div>
             <div id="overview">
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+
                     <Card>
                         <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                             <CardTitle className="text-sm font-medium">
@@ -31,7 +50,7 @@ export default function TransactionOverview() {
                             </svg>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">₹45,231.89</div>
+                            <div className="text-2xl font-bold">₹{revenue}</div>
                             <p className="text-xs text-muted-foreground">
                                 +20.1% from last month
                             </p>
@@ -40,7 +59,7 @@ export default function TransactionOverview() {
                     <Card>
                         <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                             <CardTitle className="text-sm font-medium">
-                                Subscriptions
+                                Total Expenditure
                             </CardTitle>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +77,7 @@ export default function TransactionOverview() {
                             </svg>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">+2350</div>
+                            <div className="text-2xl font-bold">₹ {expenditure}</div>
                             <p className="text-xs text-muted-foreground">
                                 +180.1% from last month
                             </p>
@@ -82,7 +101,7 @@ export default function TransactionOverview() {
                             </svg>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">+12,234</div>
+                            <div className="text-2xl font-bold">₹{sale}</div>
                             <p className="text-xs text-muted-foreground">
                                 +19% from last month
                             </p>
@@ -90,9 +109,7 @@ export default function TransactionOverview() {
                     </Card>
                     <Card>
                         <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
-                            <CardTitle className="text-sm font-medium">
-                                Active Now
-                            </CardTitle>
+                            <CardTitle className="text-sm font-medium">Total Transaction</CardTitle>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
@@ -107,7 +124,7 @@ export default function TransactionOverview() {
                             </svg>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">+573</div>
+                            <div className="text-2xl font-bold">{transactionList.length}</div>
                             <p className="text-xs text-muted-foreground">
                                 +201 since last hour
                             </p>
@@ -116,5 +133,5 @@ export default function TransactionOverview() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
