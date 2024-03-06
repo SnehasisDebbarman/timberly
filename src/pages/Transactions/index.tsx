@@ -15,13 +15,14 @@ import {
 } from "@/components/ui/dialog"
 
 
+
 import TransactionOverview from "./TransactionOverview";
 
 
 export default function Transaction() {
     const [addTransactionOpen, setAddTransactionOpen] = useState(false)
     return (
-        <div>
+        <div className="flex flex-col h-screen overflow-y-hidden">
             <div className="flex justify-between p-2">
                 <h2 className="text-2xl font-bold tracking-tight">Transactions</h2>
 
@@ -46,7 +47,11 @@ export default function Transaction() {
             </div>
             <TransactionOverview />
             <h2 className="p-5 pl-2 text-xl font-bold tracking-tight">Transactions History</h2>
-            <TransactionList />
+
+            <div className="flex-1">
+                <TransactionList />
+            </div>
+
         </div>
     )
 }

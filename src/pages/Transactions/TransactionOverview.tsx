@@ -14,14 +14,14 @@ export default function TransactionOverview() {
     const transactionList = useRecoilValue(transactionListDataState);
     let revenue = 0.0
     let expenditure = 0.0;
-    let sale = 0.0
-    transactionList.map((it: any) => {
+    let sell = 0.0
+    transactionList?.map((it: any) => {
         revenue += (parseFloat(it?.quantity) * parseFloat(it?.pricePerUnit))
         if (it?.transactionType?.toLowerCase() === "buy") {
-            sale += (parseFloat(it?.quantity) * parseFloat(it?.pricePerUnit))
+            expenditure += (parseFloat(it?.quantity) * parseFloat(it?.pricePerUnit))
         }
         else {
-            expenditure += (parseFloat(it?.quantity) * parseFloat(it?.pricePerUnit))
+            sell += (parseFloat(it?.quantity) * parseFloat(it?.pricePerUnit))
 
         }
 
@@ -101,7 +101,7 @@ export default function TransactionOverview() {
                             </svg>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">₹{sale}</div>
+                            <div className="text-2xl font-bold">₹{sell}</div>
                             <p className="text-xs text-muted-foreground">
                                 +19% from last month
                             </p>
@@ -124,7 +124,7 @@ export default function TransactionOverview() {
                             </svg>
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">{transactionList.length}</div>
+                            <div className="text-2xl font-bold">{transactionList?.length}</div>
                             <p className="text-xs text-muted-foreground">
                                 +201 since last hour
                             </p>
