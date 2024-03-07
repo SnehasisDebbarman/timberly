@@ -80,13 +80,13 @@ export function DataTable<TData, TValue>({
         <div className="space-y-4">
             <DataTableToolbar filterOptions={filterOptions} table={table} />
             <div className="border rounded-md">
-                <Table>
+                <Table className="text-xs">
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
-                            <TableRow key={headerGroup.id}>
+                            <TableRow className="h-10" key={headerGroup.id}>
                                 {headerGroup.headers.map((header) => {
                                     return (
-                                        <TableHead key={header.id} colSpan={header.colSpan}>
+                                        <TableHead className="h-8" key={header.id} colSpan={header.colSpan}>
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(
@@ -107,7 +107,7 @@ export function DataTable<TData, TValue>({
                                     data-state={row.getIsSelected() && "selected"}
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
+                                        <TableCell className="px-4 py-2" key={cell.id}>
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext()

@@ -28,27 +28,6 @@ export default function TransactionList() {
         <div>
             <div className={'grid'}>
                 <DataTable filterOptions={filterOptions} columns={transactionColumns} data={data} />
-                {/* {
-                    data.map((it: any, i: number) => (
-                        <div key={i}>
-                            <Card className={it?.transactionType === "Buy" ? "bg-green-200" : "bg-red-200"}>
-                                <CardHeader>
-                                    <CardTitle>{it?.propertyName}</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className='flex flex-col gap-2'>
-                                        {
-                                            Object.keys(it).map((key, i: number) => {
-                                                return <InfoChip key={i} type={key} value={it[key]} />
-                                            })
-                                        }
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    ))
-                } */}
-
             </div>
 
         </div>

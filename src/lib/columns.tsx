@@ -116,12 +116,13 @@ export const transactionColumns: ColumnDef<TransactionType>[] = [
     },
     {
         accessorKey: "pricePerUnit",
-        header: ({ column }) => <DataTableColumnHeader className="" column={column} title="Price per Unit" />,
+        header: "Price per unit",
+        // header: ({ column }) => <DataTableColumnHeader className="text-xs" column={column} title="Price per Unit" />,
     },
     {
         accessorKey: "quantity",
-        // header: "quantity ",
-        header: ({ column }) => <DataTableColumnHeader className="" column={column} title="Quantity" />,
+        header: "Quantity ",
+        // header: ({ column }) => <DataTableColumnHeader className="" column={column} title="Quantity" />,
     },
     // {
     //     accessorKey: "transactionIdfromFE",

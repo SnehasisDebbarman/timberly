@@ -13,23 +13,14 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-
-
-
 import TransactionOverview from "./TransactionOverview";
-
 
 export default function Transaction() {
     const [addTransactionOpen, setAddTransactionOpen] = useState(false)
     return (
-        <div className="flex flex-col h-screen overflow-y-hidden">
+        <div className="flex flex-col ">
             <div className="flex justify-between p-2">
                 <h2 className="text-2xl font-bold tracking-tight">Transactions</h2>
-
-
-
-
-
                 <Dialog open={addTransactionOpen} onOpenChange={setAddTransactionOpen}>
                     <DialogTrigger>
                         <Button onClick={() => { setAddTransactionOpen(true) }}>  <PlusIcon className="mr-2" /> Add Transactions</Button>
@@ -47,11 +38,7 @@ export default function Transaction() {
             </div>
             <TransactionOverview />
             <h2 className="p-5 pl-2 text-xl font-bold tracking-tight">Transactions History</h2>
-
-            <div className="flex-1">
-                <TransactionList />
-            </div>
-
+            <TransactionList />
         </div>
     )
 }

@@ -36,7 +36,7 @@ export default function CustomerList() {
                         <div key={i}>
                             <Card >
                                 <CardHeader>
-                                    <CardTitle>{it?.name}</CardTitle>
+                                    <CardTitle className='text-black'>{it?.name}</CardTitle>
                                     {/* <CardDescription>lengthWise</CardDescription> */}
                                 </CardHeader>
                                 <CardContent>
