@@ -1,4 +1,4 @@
-import { RequestOptions, ProductInfo, TransactionType } from "@/lib/types";
+import type { RequestOptions, ProductInfo, TransactionType } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
 
 export function GetAllCategory() {
